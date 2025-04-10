@@ -15,8 +15,8 @@
 
 CC      = ccache gcc
 LD      = $(CC)
-CFLAGS  = -Wall -Wextra -O3 -march=native -flto=auto -pipe -msse -msse2 -msse3 -msse4.1 -fsanitize=address -g
-LDFLAGS = -flto=auto
+CFLAGS  = -Wall -Wextra -O2 -march=native -pipe -g
+LDFLAGS = 
 
 SRC     = $(shell find . -name '*.c')
 OBJ     = $(SRC:.c=.o)
