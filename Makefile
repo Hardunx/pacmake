@@ -13,7 +13,7 @@
 #   You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-CC      = ccache gcc
+CC      = gcc
 LD      = $(CC)
 CFLAGS  = -Wall -Wextra -O2 -march=native -pipe -g
 LDFLAGS = 
