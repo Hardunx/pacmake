@@ -27,7 +27,8 @@
 static char *substr(const char *str, int start, int len, int verbose) {
     char *result = malloc(len + 1);
     if (!result) {
-        if (verbose )fprintf(stderr, "%s: parser error: allocation error for substr function.\n", PACMAKE);
+        if (verbose)
+            fprintf(stderr, "%s: parser error: memory allocation failure in substr function.\n", PACMAKE);
         exit(EXIT_FAILURE);
     }
     strncpy(result, str + start, len);
@@ -37,13 +38,15 @@ static char *substr(const char *str, int start, int len, int verbose) {
 
 struct package parse_pacmake(FILE *file, int verbose) {
     if (file == NULL) {
-        if (verbose) fprintf(stderr, "%s: parser error: failure to open pacmake file.\n", PACMAKE);
+        if (verbose) 
+            fprintf(stderr, "%s: parser error: failed to open pacmake file.\n", PACMAKE);
         return NONEPKG;
     }
 
     struct repository *out_repos = malloc(sizeof(struct repository));
     if (!out_repos) {
-        if (verbose) fprintf(stderr, "%s: parser error: allocation error for repository.\n", PACMAKE);
+        if (verbose) 
+            fprintf(stderr, "%s: parser error: memory allocation failure for repository structure.\n", PACMAKE);
         exit(EXIT_FAILURE);
     }
     out_repos->name = NULL;
@@ -107,7 +110,8 @@ char *strip_version(const char *dep, int verbose) {
         size_t len = pos - dep;
         result = malloc(len + 1);
         if (!result) {
-            if (verbose) fprintf(stderr, "%s: parser error: allocation failure in strip_version.\n", PACMAKE);
+            if (verbose) 
+                fprintf(stderr, "%s: parser error: memory allocation failure in strip_version function.\n", PACMAKE);
             exit(EXIT_FAILURE);
         }
         strncpy(result, dep, len);
@@ -119,7 +123,8 @@ char *strip_version(const char *dep, int verbose) {
         size_t len = pos - dep;
         result = malloc(len + 1);
         if (!result) {
-            if (verbose) fprintf(stderr, "%s: parser error: allocation failure in strip_version.\n", PACMAKE);
+            if (verbose) 
+                fprintf(stderr, "%s: parser error: memory allocation failure in strip_version function.\n", PACMAKE);
             exit(EXIT_FAILURE);
         }
         strncpy(result, dep, len);
@@ -132,14 +137,14 @@ char *strip_version(const char *dep, int verbose) {
 char **parse_depends(FILE *pkgbuildf, int verbose) {
     if (pkgbuildf == NULL) {
         if (verbose)
-            fprintf(stderr, "pacmake: parser error: failure on opening PKGBUILD file.\n");
+            fprintf(stderr, "%s: parser error: failed to open PKGBUILD file.\n", PACMAKE);
         return NULL;
     }
 
     char **depends = malloc(sizeof(char *) * 256);
     if (!depends) {
         if (verbose)
-            fprintf(stderr, "%s: parser error: allocation failure for depends array.\n", PACMAKE);
+            fprintf(stderr, "%s: parser error: memory allocation failure for depends array.\n", PACMAKE);
         exit(EXIT_FAILURE);
     }
     int count = 0;
